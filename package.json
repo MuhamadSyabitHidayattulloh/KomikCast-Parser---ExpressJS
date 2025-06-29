@@ -1,0 +1,34 @@
+{
+  "name": "komikcast-api",
+  "version": "1.0.0",
+  "description": "REST API untuk parser KomikCast menggunakan Express.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "node test.js"
+  },
+  "keywords": [
+    "komikcast",
+    "manga",
+    "parser",
+    "api",
+    "express",
+    "scraper"
+  ],
+  "author": "MuhamadSyabitHidayattulloh",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
+
