@@ -97,7 +97,138 @@ app.get('/', (req, res) => {
             search: '/search?q=naruto&page=1',
             manga_detail: '/manga/:slug',
             chapter_images: '/chapter/:slug/:chapterNumber',
-            filter: '/filter?status=ongoing&type=manga&orderby=popular&page=1'
+            filter: '/filter?status=ongoing&type=manga&orderby=popular&page=1',
+            filters: '/filters'
+        }
+    });
+});
+
+// Route for Available Filters
+app.get('/filters', (req, res) => {
+    const filters = {
+        status: [
+            { label: 'All', value: '' },
+            { label: 'Ongoing', value: 'ongoing' },
+            { label: 'Completed', value: 'completed' }
+        ],
+        type: [
+            { label: 'All', value: '' },
+            { label: 'Manga', value: 'manga' },
+            { label: 'Manhwa', value: 'manhwa' },
+            { label: 'Manhua', value: 'manhua' }
+        ],
+        orderby: [
+            { label: 'Default', value: '' },
+            { label: 'A-Z', value: 'titleasc' },
+            { label: 'Z-A', value: 'titledesc' },
+            { label: 'Latest Update', value: 'update' },
+            { label: 'Most Popular', value: 'popular' }
+        ],
+        genres: [
+            { label: '4-Koma', value: '4-koma' },
+            { label: 'Action', value: 'action' },
+            { label: 'Action Adventure', value: 'action-adventure' },
+            { label: 'Adaptation', value: 'adaptation' },
+            { label: 'Adult', value: 'adult' },
+            { label: 'Adventure', value: 'adventure' },
+            { label: 'Animals', value: 'animals' },
+            { label: 'Anthology', value: 'anthology' },
+            { label: 'Award Winning', value: 'award-winning' },
+            { label: 'Bodyswap', value: 'bodyswap' },
+            { label: 'Boys Love', value: 'boys-love' },
+            { label: 'Bully', value: 'bully' },
+            { label: 'Cartoon', value: 'cartoon' },
+            { label: 'Comedy', value: 'comedy' },
+            { label: 'Crime', value: 'crime' },
+            { label: 'Crossdressing', value: 'crossdressing' },
+            { label: 'Delinquents', value: 'delinquents' },
+            { label: 'Demons', value: 'demons' },
+            { label: 'Drama', value: 'drama' },
+            { label: 'Ecchi', value: 'ecchi' },
+            { label: 'Fantasy', value: 'fantasy' },
+            { label: 'Full Color', value: 'full-color' },
+            { label: 'Game', value: 'game' },
+            { label: 'Gender Bender', value: 'gender-bender' },
+            { label: 'Ghosts', value: 'ghosts' },
+            { label: 'Girls Love', value: 'girls-love' },
+            { label: 'Gore', value: 'gore' },
+            { label: 'Gyaru', value: 'gyaru' },
+            { label: 'Harem', value: 'harem' },
+            { label: 'Historical', value: 'historical' },
+            { label: 'Horror', value: 'horror' },
+            { label: 'Incest', value: 'incest' },
+            { label: 'Isekai', value: 'isekai' },
+            { label: 'Josei', value: 'josei' },
+            { label: 'Loli', value: 'loli' },
+            { label: 'Long Strip', value: 'long-strip' },
+            { label: 'Magic', value: 'magic' },
+            { label: 'Magical Girls', value: 'magical-girls' },
+            { label: 'Martial Arts', value: 'martial-arts' },
+            { label: 'Mature', value: 'mature' },
+            { label: 'Mecha', value: 'mecha' },
+            { label: 'Medical', value: 'medical' },
+            { label: 'Military', value: 'military' },
+            { label: 'Monster Girls', value: 'monster-girls' },
+            { label: 'Monsters', value: 'monsters' },
+            { label: 'Music', value: 'music' },
+            { label: 'Mystery', value: 'mystery' },
+            { label: 'Ninja', value: 'ninja' },
+            { label: 'Office Workers', value: 'office-workers' },
+            { label: 'Oneshot', value: 'oneshot' },
+            { label: 'Philosophical', value: 'philosophical' },
+            { label: 'Police', value: 'police' },
+            { label: 'Post-Apocalyptic', value: 'post-apocalyptic' },
+            { label: 'Psychological', value: 'psychological' },
+            { label: 'Reincarnation', value: 'reincarnation' },
+            { label: 'Reverse Harem', value: 'reverse-harem' },
+            { label: 'Romance', value: 'romance' },
+            { label: 'Samurai', value: 'samurai' },
+            { label: 'School Life', value: 'school-life' },
+            { label: 'Sci-Fi', value: 'sci-fi' },
+            { label: 'Seinen', value: 'seinen' },
+            { label: 'Sexual Violence', value: 'sexual-violence' },
+            { label: 'Shota', value: 'shota' },
+            { label: 'Shoujo', value: 'shoujo' },
+            { label: 'Shoujo Ai', value: 'shoujo-ai' },
+            { label: 'Shounen', value: 'shounen' },
+            { label: 'Shounen Ai', value: 'shounen-ai' },
+            { label: 'Slice of Life', value: 'slice-of-life' },
+            { label: 'Smut', value: 'smut' },
+            { label: 'Sports', value: 'sports' },
+            { label: 'Superhero', value: 'superhero' },
+            { label: 'Supernatural', value: 'supernatural' },
+            { label: 'Survival', value: 'survival' },
+            { label: 'Thriller', value: 'thriller' },
+            { label: 'Time Travel', value: 'time-travel' },
+            { label: 'Traditional Games', value: 'traditional-games' },
+            { label: 'Tragedy', value: 'tragedy' },
+            { label: 'User Created', value: 'user-created' },
+            { label: 'Vampires', value: 'vampires' },
+            { label: 'Video Games', value: 'video-games' },
+            { label: 'Villainess', value: 'villainess' },
+            { label: 'Virtual Reality', value: 'virtual-reality' },
+            { label: 'Web Comic', value: 'web-comic' },
+            { label: 'Wuxia', value: 'wuxia' },
+            { label: 'Yaoi', value: 'yaoi' },
+            { label: 'Yuri', value: 'yuri' },
+            { label: 'Zombies', value: 'zombies' }
+        ],
+        project: [
+            { label: 'All Manga', value: false },
+            { label: 'Project Only', value: true }
+        ]
+    };
+
+    res.json({
+        success: true,
+        message: 'Available filter options for KomikCast API',
+        data: filters,
+        usage: {
+            status: 'Use status filter to filter by completion status',
+            type: 'Use type filter to filter by manga origin (Japan/Korea/China)',
+            orderby: 'Use orderby filter to sort results',
+            genres: 'Use genres filter with comma-separated values. Prefix with "-" to exclude (e.g., "action,-comedy")',
+            project: 'Use project filter to show only project manga'
         }
     });
 });

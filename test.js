@@ -41,6 +41,7 @@ async function runTests() {
     
     const tests = [
         { name: 'Root Endpoint', url: `${BASE_URL}/` },
+        { name: 'Available Filters', url: `${BASE_URL}/filters` },
         { name: 'Popular Manga', url: `${BASE_URL}/popular?page=1` },
         { name: 'Latest Updates', url: `${BASE_URL}/latest?page=1` },
         { name: 'Search Manga', url: `${BASE_URL}/search?q=naruto&page=1` },
