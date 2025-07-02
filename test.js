@@ -45,7 +45,8 @@ async function runTests() {
         { name: 'Popular Manga', url: `${BASE_URL}/popular?page=1` },
         { name: 'Latest Updates', url: `${BASE_URL}/latest?page=1` },
         { name: 'Search Manga', url: `${BASE_URL}/search?q=naruto&page=1` },
-        { name: 'Filter Manga', url: `${BASE_URL}/filter?status=ongoing&type=manga&page=1` }
+        { name: 'Filter Manga', url: `${BASE_URL}/filter?status=ongoing&type=manga&page=1` },
+        { name: 'Recommendation', url: `${BASE_URL}/recommendation` } // <--- Tambahkan di sini
     ];
     
     let passed = 0;

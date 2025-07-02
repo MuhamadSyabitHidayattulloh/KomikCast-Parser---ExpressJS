@@ -86,6 +86,34 @@ function extractMangaFromElement($, element) {
     };
 }
 
+// Tambahkan helper untuk ekstrak rekomendasi
+function extractRecommendationFromElement($, element) {
+    const $el = $(element);
+    const aTag = $el.find('a').first();
+    const link = aTag.attr('href') || '';
+    const title = aTag.attr('title') || $el.find('.title').text().trim();
+    const thumbnail = getImageAttr($el.find('img').first());
+    const type = $el.find('.type').text().trim();
+    const chapter = $el.find('.chapter').text().trim();
+    const rating = $el.find('.numscore').text().trim();
+    // rating-bintang span style="width:80%" -> ambil angka 80
+    let score = null;
+    const ratingSpan = $el.find('.rating-bintang span').attr('style');
+    if (ratingSpan) {
+        const match = ratingSpan.match(/width:(\d+)%/);
+        if (match) score = parseInt(match[1]);
+    }
+    return {
+        title,
+        link,
+        thumbnail,
+        type,
+        chapter,
+        rating,
+        score
+    };
+}
+
 // Root endpoint
 app.get('/', (req, res) => {
     res.json({
@@ -98,7 +126,8 @@ app.get('/', (req, res) => {
             manga_detail: '/manga/:slug',
             chapter_images: '/chapter/:slug/:chapterNumber',
             filter: '/filter?status=ongoing&type=manga&orderby=popular&page=1',
-            filters: '/filters'
+            filters: '/filters',
+            recommendation: '/recommendation' // <--- Tambahkan di sini
         }
     });
 });
@@ -589,6 +618,37 @@ app.get('/filter', async (req, res) => {
             success: false,
             error: 'Failed to fetch filtered manga',
             message: error.message 
+        });
+    }
+});
+
+// Endpoint Recommendation
+app.get('/recommendation', async (req, res) => {
+    try {
+        const url = `${BASE_URL}/`;
+        console.log(`Fetching recommendations from: ${url}`);
+        const { data } = await axios.get(url, {
+            headers: getHeaders(),
+            timeout: 10000
+        });
+        const $ = cheerio.load(data);
+        const recommendations = [];
+        // Ambil semua .swiper-slide.splide-slide di dalam .swiper-wrapper
+        $('.swiper-wrapper .swiper-slide.splide-slide').each((i, el) => {
+            const rec = extractRecommendationFromElement($, el);
+            if (rec.title && rec.link) recommendations.push(rec);
+        });
+        res.json({
+            success: true,
+            data: recommendations,
+            total: recommendations.length
+        });
+    } catch (error) {
+        console.error('Error fetching recommendations:', error.message);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to fetch recommendations',
+            message: error.message
         });
     }
 });

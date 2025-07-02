@@ -86,7 +86,8 @@ Menampilkan informasi dasar API dan daftar endpoint yang tersedia.
         "manga_detail": "/manga/:slug",
         "chapter_images": "/chapter/:slug/:chapterNumber",
         "filter": "/filter?status=ongoing&type=manga&orderby=popular&page=1",
-        "filters": "/filters"
+        "filters": "/filters",
+        "recommendation": "/recommendation"
       }
     }
     ```
@@ -398,6 +399,33 @@ Memfilter manga berdasarkan berbagai kriteria.
         }
         // ...dan seterusnya...
       ]
+    }
+    ```
+
+
+### 9. Rekomendasi Manga
+
+Mengambil daftar rekomendasi manga dari halaman utama KomikCast.
+
+-   **URL:** `https://komikcast-parser-expressjs-production.up.railway.app/recommendation`
+-   **Metode:** `GET`
+-   **Contoh Respons:**
+    ```json
+    {
+      "success": true,
+      "data": [
+        {
+          "title": "Murim Login",
+          "link": "https://komikcast.li/komik/murim-login/",
+          "thumbnail": "https://komikcast.li/wp-content/uploads/2024/07/murim-login.jpeg",
+          "type": "Manhwa",
+          "chapter": "Ch.229",
+          "rating": "8.7",
+          "score": 87
+        }
+        // ...dan seterusnya...
+      ],
+      "total": 10
     }
     ```
 
