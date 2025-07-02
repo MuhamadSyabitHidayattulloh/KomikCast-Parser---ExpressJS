@@ -2,6 +2,16 @@
 
 REST API untuk melakukan parsing data dari KomikCast menggunakan Express.js, Cheerio, dan Axios.
 
+## Demo Publik
+
+API ini juga tersedia secara publik di Railway:
+
+**Base URL:**  
+`https://komikcast-parser-expressjs-production.up.railway.app`
+
+Contoh:  
+`https://komikcast-parser-expressjs-production.up.railway.app/popular?page=1`
+
 ## Fitur
 
 - Mengambil daftar manga populer
@@ -50,9 +60,13 @@ nohup node app.js > server.log 2>&1 &
 
 Server akan berjalan di `http://localhost:3000` secara default.
 
+**Atau gunakan API publik di Railway:**  
+`https://komikcast-parser-expressjs-production.up.railway.app`
+
 ## Endpoint API
 
 Berikut adalah daftar endpoint yang tersedia:
+
 
 ### 1. Root Endpoint
 
@@ -63,103 +77,298 @@ Menampilkan informasi dasar API dan daftar endpoint yang tersedia.
 -   **Contoh Respons:**
     ```json
     {
-        "message": "KomikCast API",
-        "version": "1.0.0",
-        "endpoints": {
-            "popular": "/popular?page=1",
-            "latest": "/latest?page=1",
-            "search": "/search?q=naruto&page=1",
-            "manga_detail": "/manga/:slug",
-            "chapter_images": "/chapter/:slug/:chapterNumber",
-            "filter": "/filter?status=ongoing&type=manga&orderby=popular&page=1",
-            "filters": "/filters"
-        }
+      "message": "KomikCast API",
+      "version": "1.0.0",
+      "endpoints": {
+        "popular": "/popular?page=1",
+        "latest": "/latest?page=1",
+        "search": "/search?q=naruto&page=1",
+        "manga_detail": "/manga/:slug",
+        "chapter_images": "/chapter/:slug/:chapterNumber",
+        "filter": "/filter?status=ongoing&type=manga&orderby=popular&page=1",
+        "filters": "/filters"
+      }
     }
     ```
+
 
 ### 2. Daftar Filter Tersedia
 
 Mengambil daftar semua filter yang tersedia untuk digunakan dalam endpoint filter.
 
--   **URL:** `https://3000-ixht87yjtusx3c8lir9le-468b127e.manusvm.computer/filters`
+-   **URL:** `https://komikcast-parser-expressjs-production.up.railway.app/filters`
 -   **Metode:** `GET`
 -   **Contoh Respons:**
     ```json
-    {"success":true,"message":"Available filter options for KomikCast API","data":{"status":[{"label":"All","value":""},{"label":"Ongoing","value":"ongoing"},{"label":"Completed","value":"completed"}],"type":[{"label":"All","value":""},{"label":"Manga","value":"manga"},{"label":"Manhwa","value":"manhwa"},{"label":"Manhua","value":"manhua"}],"orderby":[{"label":"Default","value":""},{"label":"A-Z","value":"titleasc"},{"label":"Z-A","value":"titledesc"},{"label":"Latest Update","value":"update"},{"label":"Most Popular","value":"popular"}],"genres":[{"label":"4-Koma","value":"4-koma"},{"label":"Action","value":"action"},{"label":"Action Adventure","value":"action-adventure"},{"label":"Adaptation","value":"adaptation"},{"label":"Adult","value":"adult"},{"label":"Adventure","value":"adventure"},{"label":"Animals","value":"animals"},{"label":"Anthology","value":"anthology"},{"label":"Award Winning","value":"award-winning"},{"label":"Bodyswap","value":"bodyswap"},{"label":"Boys Love","value":"boys-love"},{"label":"Bully","value":"bully"},{"label":"Cartoon","value":"cartoon"},{"label":"Comedy","value":"comedy"},{"label":"Crime","value":"crime"},{"label":"Crossdressing","value":"crossdressing"},{"label":"Delinquents","value":"delinquents"},{"label":"Demons","value":"demons"},{"label":"Drama","value":"drama"},{"label":"Ecchi","value":"ecchi"},{"label":"Fantasy","value":"fantasy"},{"label":"Full Color","value":"full-color"},{"label":"Game","value":"game"},{"label":"Gender Bender","value":"gender-bender"},{"label":"Ghosts","value":"ghosts"},{"label":"Girls Love","value":"girls-love"},{"label":"Gore","value":"gore"},{"label":"Gyaru","value":"gyaru"},{"label":"Harem","value":"harem"},{"label":"Historical","value":"historical"},{"label":"Horror","value":"horror"},{"label":"Incest","value":"incest"},{"label":"Isekai","value":"isekai"},{"label":"Josei","value":"josei"},{"label":"Loli","value":"loli"},{"label":"Long Strip","value":"long-strip"},{"label":"Magic","value":"magic"},{"label":"Magical Girls","value":"magical-girls"},{"label":"Martial Arts","value":"martial-arts"},{"label":"Mature","value":"mature"},{"label":"Mecha","value":"mecha"},{"label":"Medical","value":"medical"},{"label":"Military","value":"military"},{"label":"Monster Girls","value":"monster-girls"},{"label":"Monsters","value":"monsters"},{"label":"Music","value":"music"},{"label":"Mystery","value":"mystery"},{"label":"Ninja","value":"ninja"},{"label":"Office Workers","value":"office-workers"},{"label":"Oneshot","value":"oneshot"},{"label":"Philosophical","value":"philosophical"},{"label":"Police","value":"police"},{"label":"Post-Apocalyptic","value":"post-apocalyptic"},{"label":"Psychological","value":"psychological"},{"label":"Reincarnation","value":"reincarnation"},{"label":"Reverse Harem","value":"reverse-harem"},{"label":"Romance","value":"romance"},{"label":"Samurai","value":"samurai"},{"label":"School Life","value":"school-life"},{"label":"Sci-Fi","value":"sci-fi"},{"label":"Seinen","value":"seinen"},{"label":"Sexual Violence","value":"sexual-violence"},{"label":"Shota","value":"shota"},{"label":"Shoujo","value":"shoujo"},{"label":"Shoujo Ai","value":"shoujo-ai"},{"label":"Shounen","value":"shounen"},{"label":"Shounen Ai","value":"shounen-ai"},{"label":"Slice of Life","value":"slice-of-life"},{"label":"Smut","value":"smut"},{"label":"Sports","value":"sports"},{"label":"Superhero","value":"superhero"},{"label":"Supernatural","value":"supernatural"},{"label":"Survival","value":"survival"},{"label":"Thriller","value":"thriller"},{"label":"Time Travel","value":"time-travel"},{"label":"Traditional Games","value":"traditional-games"},{"label":"Tragedy","value":"tragedy"},{"label":"User Created","value":"user-created"},{"label":"Vampires","value":"vampires"},{"label":"Video Games","value":"video-games"},{"label":"Villainess","value":"villainess"},{"label":"Virtual Reality","value":"virtual-reality"},{"label":"Web Comic","value":"web-comic"},{"label":"Wuxia","value":"wuxia"},{"label":"Yaoi","value":"yaoi"},{"label":"Yuri","value":"yuri"},{"label":"Zombies","value":"zombies"}],"project":[{"label":"All Manga","value":false},{"label":"Project Only","value":true}]},"usage":{"status":"Use status filter to filter by completion status","type":"Use type filter to filter by manga origin (Japan/Korea/China)","orderby":"Use orderby filter to sort results","genres":"Use genres filter with comma-separated values. Prefix with \"-\" to exclude (e.g., \"action,-comedy\")","project":"Use project filter to show only project manga"}}
+    {
+      "success": true,
+      "message": "Available filter options for KomikCast API",
+      "data": {
+        "status": [
+          { "label": "All", "value": "" },
+          { "label": "Ongoing", "value": "ongoing" },
+          { "label": "Completed", "value": "completed" }
+        ],
+        "type": [
+          { "label": "All", "value": "" },
+          { "label": "Manga", "value": "manga" },
+          { "label": "Manhwa", "value": "manhwa" },
+          { "label": "Manhua", "value": "manhua" }
+        ],
+        "orderby": [
+          { "label": "Default", "value": "" },
+          { "label": "A-Z", "value": "titleasc" },
+          { "label": "Z-A", "value": "titledesc" },
+          { "label": "Latest Update", "value": "update" },
+          { "label": "Most Popular", "value": "popular" }
+        ],
+        "genres": [
+          { "label": "4-Koma", "value": "4-koma" },
+          { "label": "Action", "value": "action" },
+          { "label": "Action Adventure", "value": "action-adventure" },
+          { "label": "Adaptation", "value": "adaptation" },
+          { "label": "Adult", "value": "adult" },
+          { "label": "Adventure", "value": "adventure" },
+          { "label": "Animals", "value": "animals" },
+          { "label": "Anthology", "value": "anthology" },
+          { "label": "Award Winning", "value": "award-winning" },
+          { "label": "Bodyswap", "value": "bodyswap" },
+          { "label": "Boys Love", "value": "boys-love" },
+          { "label": "Bully", "value": "bully" },
+          { "label": "Cartoon", "value": "cartoon" },
+          { "label": "Comedy", "value": "comedy" },
+          { "label": "Crime", "value": "crime" },
+          { "label": "Crossdressing", "value": "crossdressing" },
+          { "label": "Delinquents", "value": "delinquents" },
+          { "label": "Demons", "value": "demons" },
+          { "label": "Drama", "value": "drama" },
+          { "label": "Ecchi", "value": "ecchi" },
+          { "label": "Fantasy", "value": "fantasy" },
+          { "label": "Full Color", "value": "full-color" },
+          { "label": "Game", "value": "game" },
+          { "label": "Gender Bender", "value": "gender-bender" },
+          { "label": "Ghosts", "value": "ghosts" },
+          { "label": "Girls Love", "value": "girls-love" },
+          { "label": "Gore", "value": "gore" },
+          { "label": "Gyaru", "value": "gyaru" },
+          { "label": "Harem", "value": "harem" },
+          { "label": "Historical", "value": "historical" },
+          { "label": "Horror", "value": "horror" },
+          { "label": "Incest", "value": "incest" },
+          { "label": "Isekai", "value": "isekai" },
+          { "label": "Josei", "value": "josei" },
+          { "label": "Loli", "value": "loli" },
+          { "label": "Long Strip", "value": "long-strip" },
+          { "label": "Magic", "value": "magic" },
+          { "label": "Magical Girls", "value": "magical-girls" },
+          { "label": "Martial Arts", "value": "martial-arts" },
+          { "label": "Mature", "value": "mature" },
+          { "label": "Mecha", "value": "mecha" },
+          { "label": "Medical", "value": "medical" },
+          { "label": "Military", "value": "military" },
+          { "label": "Monster Girls", "value": "monster-girls" },
+          { "label": "Monsters", "value": "monsters" },
+          { "label": "Music", "value": "music" },
+          { "label": "Mystery", "value": "mystery" },
+          { "label": "Ninja", "value": "ninja" },
+          { "label": "Office Workers", "value": "office-workers" },
+          { "label": "Oneshot", "value": "oneshot" },
+          { "label": "Philosophical", "value": "philosophical" },
+          { "label": "Police", "value": "police" },
+          { "label": "Post-Apocalyptic", "value": "post-apocalyptic" },
+          { "label": "Psychological", "value": "psychological" },
+          { "label": "Reincarnation", "value": "reincarnation" },
+          { "label": "Reverse Harem", "value": "reverse-harem" },
+          { "label": "Romance", "value": "romance" },
+          { "label": "Samurai", "value": "samurai" },
+          { "label": "School Life", "value": "school-life" },
+          { "label": "Sci-Fi", "value": "sci-fi" },
+          { "label": "Seinen", "value": "seinen" },
+          { "label": "Sexual Violence", "value": "sexual-violence" },
+          { "label": "Shota", "value": "shota" },
+          { "label": "Shoujo", "value": "shoujo" },
+          { "label": "Shoujo Ai", "value": "shoujo-ai" },
+          { "label": "Shounen", "value": "shounen" },
+          { "label": "Shounen Ai", "value": "shounen-ai" },
+          { "label": "Slice of Life", "value": "slice-of-life" },
+          { "label": "Smut", "value": "smut" },
+          { "label": "Sports", "value": "sports" },
+          { "label": "Superhero", "value": "superhero" },
+          { "label": "Supernatural", "value": "supernatural" },
+          { "label": "Survival", "value": "survival" },
+          { "label": "Thriller", "value": "thriller" },
+          { "label": "Time Travel", "value": "time-travel" },
+          { "label": "Traditional Games", "value": "traditional-games" },
+          { "label": "Tragedy", "value": "tragedy" },
+          { "label": "User Created", "value": "user-created" },
+          { "label": "Vampires", "value": "vampires" },
+          { "label": "Video Games", "value": "video-games" },
+          { "label": "Villainess", "value": "villainess" },
+          { "label": "Virtual Reality", "value": "virtual-reality" },
+          { "label": "Web Comic", "value": "web-comic" },
+          { "label": "Wuxia", "value": "wuxia" },
+          { "label": "Yaoi", "value": "yaoi" },
+          { "label": "Yuri", "value": "yuri" },
+          { "label": "Zombies", "value": "zombies" }
+        ],
+        "project": [
+          { "label": "All Manga", "value": false },
+          { "label": "Project Only", "value": true }
+        ]
+      },
+      "usage": {
+        "status": "Use status filter to filter by completion status",
+        "type": "Use type filter to filter by manga origin (Japan/Korea/China)",
+        "orderby": "Use orderby filter to sort results",
+        "genres": "Use genres filter with comma-separated values. Prefix with \"-\" to exclude (e.g., \"action,-comedy\")",
+        "project": "Use project filter to show only project manga"
+      }
+    }
     ```
+
 
 ### 3. Manga Populer
 
 Mengambil daftar manga populer.
 
--   **URL:** `https://3000-ixht87yjtusx3c8lir9le-468b127e.manusvm.computer/popular?page=1`
+-   **URL:** `https://komikcast-parser-expressjs-production.up.railway.app/popular?page=1`
 -   **Metode:** `GET`
 -   **Query Parameters:**
     -   `page` (opsional): Nomor halaman (default: 1)
 -   **Contoh Respons:**
     ```json
-    {"success":true,"page":1,"data":[{"title":"Murim Login","link":"https://komikcast.li/komik/murim-login/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/07/murim-login.jpeg","latestChapter":"Ch.229"},{"title":"Eleceed","link":"https://komikcast.li/komik/eleceed/","thumbnail":"https://komikcast.li/wp-content/uploads/2020/12/31013-e1609090459258.jpg","latestChapter":"Ch.356"},{"title":"God of Martial Arts","link":"https://komikcast.li/komik/god-martial-arts/","thumbnail":"https://komikcast.li/wp-content/uploads/2019/08/mf903fkaedfad-e1565971570852.jpg","latestChapter":"Ch.855"},{"title":"Rebirth Of The Urban Immortal Cultivator","link":"https://komikcast.li/komik/rebirth-of-the-urban-immortal-cultivator/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/07/rotu762352323-e1656913062334.jpg","latestChapter":"Ch.1031"},{"title":"Magic Emperor","link":"https://komikcast.li/komik/magic-emperor/","thumbnail":"https://komikcast.li/wp-content/uploads/2019/10/magic-emperor.jpg","latestChapter":"Ch.720"},{"title":"Kimetsu no Yaiba","link":"https://komikcast.li/komik/kimetsu-no-yaiba/","thumbnail":"https://komikcast.li/wp-content/uploads/2019/08/nezukoyaiba-e1565478995401.jpg","latestChapter":"Ch.205.1"},{"title":"Nano Machine","link":"https://komikcast.li/komik/nano-machine/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/05/Nano-Machine-e1748461404989.jpg","latestChapter":"Ch.266"},{"title":"Spirit Sword Sovereign","link":"https://komikcast.li/komik/spirit-sword-sovereign/","thumbnail":"https://komikcast.li/wp-content/uploads/2019/07/321321fdsfga.jpg","latestChapter":"Ch.530 END"},{"title":"Soul Land","link":"https://komikcast.li/komik/soul-land/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/11/soulland.jpg","latestChapter":"Ch.361"},{"title":"The Last Human","link":"https://komikcast.li/komik/the-last-human/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/09/Cover.jpg","latestChapter":"Ch.590"},{"title":"The Demon King Who Lost His Job","link":"https://komikcast.li/komik/the-demon-king-who-lost-his-job/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/09/maougakadakerjaan.jpg","latestChapter":"Ch.440"},{"title":"Isekai Meikyuu de Harem wo","link":"https://komikcast.li/komik/isekai-meikyuu-de-harem-wo/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/08/MLk0D0.jpg","latestChapter":"Ch.86"},{"title":"Soul Land II","link":"https://komikcast.li/komik/soul-land-ii/","thumbnail":"https://komikcast.li/wp-content/uploads/2017/11/Soul_Land_II.jpg","latestChapter":"Ch.403"},{"title":"Kaifuku Jutsushi Yarinaoshi: Sokushi Mahou to Skill Copy no Chouetsu Heal","link":"https://komikcast.li/komik/kaifuku-jutsushi-yarinaoshi-sokushi-mahou-skill-copy-no-chouetsu-heal/","thumbnail":"https://komikcast.li/wp-content/uploads/2021/07/E6hIrS9WEAUGPwt-e1626659207402.jpg","latestChapter":"Ch.70.2"},{"title":"Strongest Anti M.E.T.A","link":"https://komikcast.li/komik/strongest-anti-m-e-t-a/","thumbnail":"https://komikcast.li/wp-content/uploads/2020/11/002-e1606268492812.jpg","latestChapter":"Ch.634.21"},{"title":"Yong Heng Zhi Zun","link":"https://komikcast.li/komik/yong-heng-zhi-zun/","thumbnail":"https://komikcast.li/wp-content/uploads/2017/09/a2-1.jpg","latestChapter":"Ch.326 S1 END"},{"title":"Kaguya-sama wa Kokurasetai: Tensai-tachi no Renai Zunousen","link":"https://komikcast.li/komik/kaguya-sama-wa-kokurasetai-tensai-tachi-no-renai-zunousen/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/10/kswk12412321321-e1665414017483.jpg","latestChapter":"Ch.281 END"},{"title":"Isekai Shihai no Skill Taker: Zero kara Hajimeru Dorei Harem","link":"https://komikcast.li/komik/isekai-shihai-no-skill-taker-zero-kara-hajimeru-dorei-harem/","thumbnail":"https://komikcast.li/wp-content/uploads/2018/05/DKK9CllUIAEpcZO.jpg","latestChapter":"Ch.76"},{"title":"Revenge of the Iron-Blooded Sword Hound","link":"https://komikcast.li/komik/revenge-of-the-iron-blooded-sword-hound/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/03/Kembalinya_Sang_Anjing_Pemburu_yang_Ganas.jpg","latestChapter":"Ch.119"},{"title":"Return of the Flowery Mountain Sect","link":"https://komikcast.li/komik/return-of-the-flowery-mountain-sect/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/06/mount-hua.png","latestChapter":"Ch.152 S2 End"},{"title":"The Heavenly Demon Can’t Live a Normal Life","link":"https://komikcast.li/komik/the-heavenly-demon-cant-live-a-normal-life/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/07/heavenly.jpg","latestChapter":"Ch.163"},{"title":"Solo Max-Level Newbie","link":"https://komikcast.li/komik/solo-max-level-newbie/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/11/solomax.jpg","latestChapter":"Ch.212"},{"title":"I’m An Evil God","link":"https://komikcast.li/komik/im-an-evil-god/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/04/Aku-adalah-Kaisar-Iblis2.jpg","latestChapter":"Ch.567"},{"title":"Yuan Zun","link":"https://komikcast.li/komik/yuan-zun/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/02/yz4853452423-e1646228807902.jpg","latestChapter":"Ch.617.5"},{"title":"Mercenary Enrollment","link":"https://komikcast.li/komik/mercenary-enrollment/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/03/mercenery.jpg","latestChapter":"Ch.244"},{"title":"Leveling In The Future (Apex Future Martial Arts)","link":"https://komikcast.li/komik/leveling-in-the-future-apex-future-martial-arts/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/01/lft236234423-e1674399618951.jpg","latestChapter":"Ch.231"},{"title":"Jujutsu Kaisen","link":"https://komikcast.li/komik/jujutsu-kaisen/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/07/jujutsu.jpg","latestChapter":"Ch.271.5"},{"title":"Wu Dong Qian Kun","link":"https://komikcast.li/komik/wu-dong-qian-kun/","thumbnail":"https://komikcast.li/wp-content/uploads/2020/11/23231-e1615788536637.jpg","latestChapter":"Ch.244"}],"total":28}
+    {
+      "success": true,
+      "page": 1,
+      "data": [
+        {
+          "title": "Murim Login",
+          "link": "https://komikcast.li/komik/murim-login/",
+          "thumbnail": "https://komikcast.li/wp-content/uploads/2024/07/murim-login.jpeg",
+          "latestChapter": "Ch.229"
+        }
+        // ...dan seterusnya...
+      ],
+      "total": 28
+    }
     ```
+
 
 ### 4. Update Manga Terbaru
 
 Mengambil daftar update manga terbaru.
 
--   **URL:** `https://3000-ixht87yjtusx3c8lir9le-468b127e.manusvm.computer/latest?page=1`
+-   **URL:** `https://komikcast-parser-expressjs-production.up.railway.app/latest?page=1`
 -   **Metode:** `GET`
 -   **Query Parameters:**
     -   `page` (opsional): Nomor halaman (default: 1)
 -   **Contoh Respons:**
     ```json
-    {"success":true,"page":1,"data":[{"title":"The New Employee Kim Chul-Soo","link":"https://komikcast.li/komik/the-new-employee-kim-chul-soo/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/07/new.jpg","latestChapter":"Ch.106"},{"title":"Battle Through the Heavens","link":"https://komikcast.li/komik/battle-through-the-heavens/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/01/Battle.jpg","latestChapter":"Ch.475"},{"title":"DANDADAN","link":"https://komikcast.li/komik/dandadan/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/09/danda080922.jpg","latestChapter":"Ch.200"},{"title":"Iron Ladies","link":"https://komikcast.li/komik/iron-ladies/","thumbnail":"https://komikcast.li/wp-content/uploads/2020/09/c6c5c03e81094176a186f595fcc12da7.jpeg","latestChapter":"Ch.606"},{"title":"XX Shinaide! Tsukimine-san","link":"https://komikcast.li/komik/xx-shinaide-tsukimine-san/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/04/21d6aw54e.jpg","latestChapter":"Ch.06"},{"title":"Watashi ni Ai wo Oshiete","link":"https://komikcast.li/komik/watashi-ni-ai-wo-oshiete/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/03/1741092343-6239-i476581.jpg","latestChapter":"Ch.2"},{"title":"Class de Ichiban Kawaii Gal wo Ezuke Shiteiru Hanashi","link":"https://komikcast.li/komik/class-de-ichiban-kawaii-gal-wo-ezuke-shiteiru-hanashi/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/05/46a4w6e4.jpg","latestChapter":"Ch.03.3"},{"title":"God of Martial Arts","link":"https://komikcast.li/komik/god-martial-arts/","thumbnail":"https://komikcast.li/wp-content/uploads/2019/08/mf903fkaedfad-e1565971570852.jpg","latestChapter":"Ch.855"},{"title":"Lanke Special Destiny","link":"https://komikcast.li/komik/lanke-special-destiny/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/05/download.jpg","latestChapter":"Ch.177"},{"title":"Uncle Bungeoppang","link":"https://komikcast.li/komik/uncle-bungeoppang/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/12/67408c9ac87d0-ximahkd3-99dba2c924c265b24a3a1cb1305de72d12099423-238643-YYzsvfKF.jpg","latestChapter":"Ch.39"},{"title":"I Transmigrated Into Demon King Of Harem?","link":"https://komikcast.li/komik/i-transmigrated-into-demon-king-of-harem/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/07/lsp742523423-e1659196582704.jpg","latestChapter":"Ch.103"},{"title":"I Really Don’t Want to Be Reborn","link":"https://komikcast.li/komik/i-really-dont-want-to-be-reborn/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/07/0asdasdasdadsadsa.jpg","latestChapter":"Ch.293"},{"title":"Player Who Can’t Level Up","link":"https://komikcast.li/komik/player-who-cant-level-up/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/01/resource.jpg","latestChapter":"Ch.195"},{"title":"Overlord of Insects","link":"https://komikcast.li/komik/overlord-of-insects/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/03/Insects.jpg","latestChapter":"Ch.62"},{"title":"The Genius Grandson of Namgung Clan","link":"https://komikcast.li/komik/the-genius-grandson-of-namgung-clan/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/11/333dawe.jpg","latestChapter":"Ch.57"},{"title":"Invincible After Shocking My Empress Wife","link":"https://komikcast.li/komik/invincible-after-shocking-my-empress-wife/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/01/ia2342423-e1704961225355.jpg","latestChapter":"Ch.79"},{"title":"Childhood Friend Of The Zenith","link":"https://komikcast.li/komik/childhood-friend-of-the-zenith/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/08/zenith.jpeg","latestChapter":"Ch.61"},{"title":"Tsuihou Sarenakatta Otoko ~Nidome no Jinsei wa Dogeza kara Hajimarimashita~","link":"https://komikcast.li/komik/tsuihou-sarenakatta-otoko-nidome-no-jinsei-wa-dogeza-kara-hajimarimashita/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/04/3KN1ol-m.jpg","latestChapter":"Ch.06"},{"title":"The Last All-Knowing Man Collected Trillions of Stuff from Day One","link":"https://komikcast.li/komik/the-last-all-knowing-man-collected-trillions-of-stuff-from-day-one/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/02/last.jpg","latestChapter":"Ch.66"},{"title":"The Dark Swordsman Returns","link":"https://komikcast.li/komik/the-dark-swordsman-returns/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/06/w7XygR-m.jpg","latestChapter":"Ch.09"},{"title":"I Love the Demon Lord So Much That Even My Female Disciples Want to Kill Me","link":"https://komikcast.li/komik/i-love-the-demon-lord-so-much-that-even-my-female-disciples-want-to-kill-me/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/01/6d4aw654e.jpg","latestChapter":"Ch.72"},{"title":"Centuria","link":"https://komikcast.li/komik/centuria/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/05/4d6aw54e68.png","latestChapter":"Ch.57"},{"title":"The King of Ten Thousand Presence (King of All Phases)","link":"https://komikcast.li/komik/the-king-of-ten-thousand-presence/","thumbnail":"https://komikcast.li/wp-content/uploads/2021/08/ar135235226263-e1629770949207.jpg","latestChapter":"Ch.127"},{"title":"Black Corporation: Joseon","link":"https://komikcast.li/komik/black-corporation-joseon/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/12/6d54aw654e84.jpg","latestChapter":"Ch.102"},{"title":"Lord of Summons! Sudden Mutation","link":"https://komikcast.li/komik/lord-of-summons-sudden-mutation/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/06/JnvbZR.webp","latestChapter":"Ch.17"},{"title":"Player.","link":"https://komikcast.li/komik/player/","thumbnail":"https://komikcast.li/wp-content/uploads/2020/05/paerplayer.jpeg","latestChapter":"Ch.205"},{"title":"Zero Kill Assassin","link":"https://komikcast.li/komik/zero-kill-assassin/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/06/kill.jpg","latestChapter":"Ch.08"},{"title":"The Ultimate of All Ages (The Ancient Sovereign of Eternity)","link":"https://komikcast.li/komik/the-ultimate-of-all-ages/","thumbnail":"https://komikcast.li/wp-content/uploads/2021/06/tuag121513435-e1622565066455.jpg","latestChapter":"Ch.435"}],"total":28}
+    {
+      "success": true,
+      "page": 1,
+      "data": [
+        {
+          "title": "The New Employee Kim Chul-Soo",
+          "link": "https://komikcast.li/komik/the-new-employee-kim-chul-soo/",
+          "thumbnail": "https://komikcast.li/wp-content/uploads/2023/07/new.jpg",
+          "latestChapter": "Ch.106"
+        }
+        // ...dan seterusnya...
+      ],
+      "total": 28
+    }
     ```
+
 
 ### 5. Cari Manga
 
 Mencari manga berdasarkan query.
 
--   **URL:** `https://3000-ixht87yjtusx3c8lir9le-468b127e.manusvm.computer/search?q=naruto&page=1`
+-   **URL:** `https://komikcast-parser-expressjs-production.up.railway.app/search?q=naruto&page=1`
 -   **Metode:** `GET`
 -   **Query Parameters:**
     -   `q` (wajib): Kata kunci pencarian
     -   `page` (opsional): Nomor halaman (default: 1)
 -   **Contoh Respons:**
     ```json
-    {"success":true,"query":"naruto","page":1,"data":[{"title":"Renge to Naruto!","link":"https://komikcast.li/komik/renge-to-naruto/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/11/renge.jpg","latestChapter":"Ch.18"},{"title":"Naruto: The Whorl within the Spiral","link":"https://komikcast.li/komik/naruto-the-whorl-within-the-spiral/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/09/minato.jpg","latestChapter":"Ch.00"},{"title":"Naruto: Konoha’s Story—The Steam Ninja Scrolls","link":"https://komikcast.li/komik/naruto-konohas-story-the-steam-ninja-scrolls/","thumbnail":"","latestChapter":"Ch.15"},{"title":"Naruto Sasuke’s Story The Uchiha And The Heavenly Stardust","link":"https://komikcast.li/komik/naruto-sasukes-story-the-uchiha-and-the-heavenly-stardust/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/10/239604.jpg","latestChapter":"Ch.10"},{"title":"Boruto: Naruto Next Generations","link":"https://komikcast.li/komik/boruto-naruto-next-generations/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/04/boruto.jpg","latestChapter":"Ch.80"},{"title":"Samurai 8: Tales of Hachimaru","link":"https://komikcast.li/komik/samurai-8-tales-of-hachimaru/","thumbnail":"https://komikcast.li/wp-content/uploads/2019/07/ewqe23333fv.jpg","latestChapter":"Ch.43 - End"}],"total":6}
+    {
+      "success": true,
+      "query": "naruto",
+      "page": 1,
+      "data": [
+        {
+          "title": "Renge to Naruto!",
+          "link": "https://komikcast.li/komik/renge-to-naruto/",
+          "thumbnail": "https://komikcast.li/wp-content/uploads/2023/11/renge.jpg",
+          "latestChapter": "Ch.18"
+        }
+        // ...dan seterusnya...
+      ],
+      "total": 6
+    }
     ```
+
 
 ### 6. Detail Manga
 
 Mengambil detail lengkap sebuah manga.
 
--   **URL:** `https://3000-ixht87yjtusx3c8lir9le-468b127e.manusvm.computer/manga/murim-login`
+-   **URL:** `https://komikcast-parser-expressjs-production.up.railway.app/manga/murim-login`
 -   **Metode:** `GET`
 -   **URL Parameters:**
     -   `slug` (wajib): Slug manga (bagian dari URL manga setelah `/manga/`, contoh: `one-piece`)
 -   **Contoh Respons:**
     ```json
-    {"success":true,"data":{"title":"Murim Login","alternative_title":"Murim Login","author":"","artist":"","description":"Sebuah era di mana para hunter hidup dengan berburu monster yang berasal dari Gerbang. Jin Tae-Kyung adalah hunter tingkat rendah yang mengambil mesin VR, dan secara tidak sengaja masuk ke dalam game, yang diatur dalam dunia Seni Bela Diri. Setelah berkali-kali jatuh bangun, Tae-Kyung mampu melarikan diri dari dunia ini. Kekuatan dan keterampilan, yang ia terima di Murim dapat dibawa kembali ke dunia nyata. Ini memungkinkannya untuk terus mencari nafkah sebagai hunter. tetapi dia memutuskan untuk kembali ke dunia Murim, karena tidak merawat teman-teman NPC-nya.","genre":["Action","Game","Martial Arts"],"status":"Ongoing","type":"","thumbnail_url":"https://komikcast.li/wp-content/uploads/2024/07/murim-login.jpeg","chapters":[{"name":"Chapter\n 229","url":"https://komikcast.li/chapter/murim-login-chapter-229-bahasa-indonesia/","date_upload":"1751131463679"},{"name":"Chapter\n 228","url":"https://komikcast.li/chapter/murim-login-chapter-228-bahasa-indonesia/","date_upload":"1750699463679"},{"name":"Chapter\n 227","url":"https://komikcast.li/chapter/murim-login-chapter-227-bahasa-indonesia/","date_upload":"1750094663679"},{"name":"Chapter\n 226","url":"https://komikcast.li/chapter/murim-login-chapter-226-bahasa-indonesia/","date_upload":"1749489863680"},{"name":"Chapter\n 225","url":"https://komikcast.li/chapter/murim-login-chapter-225-bahasa-indonesia/","date_upload":"1748625863680"},{"name":"Chapter\n 224","url":"https://komikcast.li/chapter/murim-login-chapter-224-bahasa-indonesia/","date_upload":"1748625863680"},{"name":"Chapter\n 223","url":"https://komikcast.li/chapter/murim-login-chapter-223-bahasa-indonesia/","date_upload":"1746033863680"},{"name":"Chapter\n 222","url":"https://komikcast.li/chapter/murim-login-chapter-222-bahasa-indonesia/","date_upload":"1746033863680"},{"name":"Chapter\n 221","url":"https://komikcast.li/chapter/murim-login-chapter-221-bahasa-indonesia/","date_upload":"1743355463680"},{"name":"Chapter\n 220","url":"https://komikcast.li/chapter/murim-login-chapter-220-bahasa-indonesia/","date_upload":"1743355463680"},{"name":"Chapter\n 219","url":"https://komikcast.li/chapter/murim-login-chapter-219-bahasa-indonesia/","date_upload":"1743355463680"},{"name":"Chapter\n 218","url":"https://komikcast.li/chapter/murim-login-chapter-218-bahasa-indonesia/","date_upload":"1743355463680"},{"name":"Chapter\n 217","url":"https://komikcast.li/chapter/murim-login-chapter-217-bahasa-indonesia/","date_upload":"1743355463680"},{"name":"Chapter\n 216","url":"https://komikcast.li/chapter/murim-login-chapter-216-bahasa-indonesia/","date_upload":"1740939863680"},{"name":"Chapter\n 215","url":"https://komikcast.li/chapter/murim-login-chapter-215-bahasa-indonesia/","date_upload":"1740939863680"},{"name":"Chapter\n 214","url":"https://komikcast.li/chapter/murim-login-chapter-214-bahasa-indonesia/","date_upload":"1740939863680"},{"name":"Chapter\n 213","url":"https://komikcast.li/chapter/murim-login-chapter-213-bahasa-indonesia/","date_upload":"1738261463681"},{"name":"Chapter\n 212 fix","url":"https://komikcast.li/chapter/murim-login-chapter-212-bahasa-indonesia/","date_upload":"1738261463681"},{"name":"Chapter\n 211","url":"https://komikcast.li/chapter/murim-login-chapter-211-bahasa-indonesia/","date_upload":"1738261463682"},{"name":"Chapter\n 210","url":"https://komikcast.li/chapter/murim-login-chapter-210-bahasa-indonesia/","date_upload":"1738261463682"},{"name":"Chapter\n 209","url":"https://komikcast.li/chapter/murim-login-chapter-209-bahasa-indonesia/","date_upload":"1735583063682"},{"name":"Chapter\n 208","url":"https://komikcast.li/chapter/murim-login-chapter-208-bahasa-indonesia-2/","date_upload":"1735583063682"},{"name":"Chapter\n 207","url":"https://komikcast.li/chapter/murim-login-chapter-207-bahasa-indonesia/","date_upload":"1735583063682"},{"name":"Chapter\n 206.5","url":"https://komikcast.li/chapter/murim-login-chapter-206-5-bahasa-indonesia/","date_upload":"1732991063682"},{"name":"Chapter\n 206","url":"https://komikcast.li/chapter/murim-login-chapter-206-bahasa-indonesia/","date_upload":"1732991063682"},{"name":"Chapter\n 205","url":"https://komikcast.li/chapter/murim-login-chapter-205-bahasa-indonesia/","date_upload":"1732991063682"},{"name":"Chapter\n 204","url":"https://komikcast.li/chapter/murim-login-chapter-204-bahasa-indonesia/","date_upload":"1732991063682"},{"name":"Chapter\n 203","url":"https://komikcast.li/chapter/murim-login-chapter-203-bahasa-indonesia/","date_upload":"1730309063682"},{"name":"Chapter\n 202","url":"https://komikcast.li/chapter/murim-login-chapter-202-bahasa-indonesia/","date_upload":"1730309063682"},{"name":"Chapter\n 201","url":"https://komikcast.li/chapter/murim-login-chapter-201-bahasa-indonesia/","date_upload":"1730309063682"},{"name":"Chapter\n 200","url":"https://komikcast.li/chapter/murim-login-chapter-200-bahasa-indonesia/","date_upload":"1730309063682"},{"name":"Chapter\n 199","url":"https://komikcast.li/chapter/murim-login-chapter-199-bahasa-indonesia/","date_upload":"1730309063683"},{"name":"Chapter\n 198","url":"https://komikcast.li/chapter/murim-login-chapter-198-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 197","url":"https://komikcast.li/chapter/murim-login-chapter-197-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 196","url":"https://komikcast.li/chapter/murim-login-chapter-196-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 195","url":"https://komikcast.li/chapter/murim-login-chapter-195-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 194","url":"https://komikcast.li/chapter/murim-login-chapter-194-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 193","url":"https://komikcast.li/chapter/murim-login-chapter-193-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 192","url":"https://komikcast.li/chapter/murim-login-chapter-192-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 191","url":"https://komikcast.li/chapter/murim-login-chapter-191-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 190","url":"https://komikcast.li/chapter/murim-login-chapter-190-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 189","url":"https://komikcast.li/chapter/murim-login-chapter-189-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 188","url":"https://komikcast.li/chapter/murim-login-chapter-188-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 187","url":"https://komikcast.li/chapter/murim-login-chapter-187-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 186","url":"https://komikcast.li/chapter/murim-login-chapter-186-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 185","url":"https://komikcast.li/chapter/murim-login-chapter-185-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 184","url":"https://komikcast.li/chapter/murim-login-chapter-184-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 183","url":"https://komikcast.li/chapter/murim-login-chapter-183-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 182","url":"https://komikcast.li/chapter/murim-login-chapter-182-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 181","url":"https://komikcast.li/chapter/murim-login-chapter-181-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 180","url":"https://komikcast.li/chapter/murim-login-chapter-180-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 179","url":"https://komikcast.li/chapter/murim-login-chapter-179-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 178","url":"https://komikcast.li/chapter/murim-login-chapter-178-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 177","url":"https://komikcast.li/chapter/murim-login-chapter-177-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 176","url":"https://komikcast.li/chapter/murim-login-chapter-176-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 175","url":"https://komikcast.li/chapter/murim-login-chapter-175-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 174","url":"https://komikcast.li/chapter/murim-login-chapter-174-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 173","url":"https://komikcast.li/chapter/murim-login-chapter-173-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 172","url":"https://komikcast.li/chapter/murim-login-chapter-172-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 171","url":"https://komikcast.li/chapter/murim-login-chapter-171-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 170","url":"https://komikcast.li/chapter/murim-login-chapter-170-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 169","url":"https://komikcast.li/chapter/murim-login-chapter-169-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 168","url":"https://komikcast.li/chapter/murim-login-chapter-168-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 167","url":"https://komikcast.li/chapter/murim-login-chapter-167-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 166","url":"https://komikcast.li/chapter/murim-login-chapter-166-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 165","url":"https://komikcast.li/chapter/murim-login-chapter-165-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 164","url":"https://komikcast.li/chapter/murim-login-chapter-164-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 163","url":"https://komikcast.li/chapter/murim-login-chapter-163-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 162","url":"https://komikcast.li/chapter/murim-login-chapter-162-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 161","url":"https://komikcast.li/chapter/murim-login-chapter-161-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 160","url":"https://komikcast.li/chapter/murim-login-chapter-160-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 159","url":"https://komikcast.li/chapter/murim-login-chapter-159-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 158","url":"https://komikcast.li/chapter/murim-login-chapter-158-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 157","url":"https://komikcast.li/chapter/murim-login-chapter-157-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 156","url":"https://komikcast.li/chapter/murim-login-chapter-156-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 155","url":"https://komikcast.li/chapter/murim-login-chapter-155-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 154","url":"https://komikcast.li/chapter/murim-login-chapter-154-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 153","url":"https://komikcast.li/chapter/murim-login-chapter-153-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 152","url":"https://komikcast.li/chapter/murim-login-chapter-152-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 151","url":"https://komikcast.li/chapter/murim-login-chapter-151-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 150","url":"https://komikcast.li/chapter/murim-login-chapter-150-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 149","url":"https://komikcast.li/chapter/murim-login-chapter-149-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 148","url":"https://komikcast.li/chapter/murim-login-chapter-148-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 147","url":"https://komikcast.li/chapter/murim-login-chapter-147-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 146","url":"https://komikcast.li/chapter/murim-login-chapter-146-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 145","url":"https://komikcast.li/chapter/murim-login-chapter-145-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 144","url":"https://komikcast.li/chapter/murim-login-chapter-144-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 143","url":"https://komikcast.li/chapter/murim-login-chapter-143-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 142","url":"https://komikcast.li/chapter/murim-login-chapter-142-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 141","url":"https://komikcast.li/chapter/murim-login-chapter-141-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 140","url":"https://komikcast.li/chapter/murim-login-chapter-140-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 139","url":"https://komikcast.li/chapter/murim-login-chapter-139-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 138","url":"https://komikcast.li/chapter/murim-login-chapter-138-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 137","url":"https://komikcast.li/chapter/murim-login-chapter-137-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 136","url":"https://komikcast.li/chapter/murim-login-chapter-136-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 135","url":"https://komikcast.li/chapter/murim-login-chapter-135-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 134","url":"https://komikcast.li/chapter/murim-login-chapter-134-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 133","url":"https://komikcast.li/chapter/murim-login-chapter-133-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 132","url":"https://komikcast.li/chapter/murim-login-chapter-132-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 131","url":"https://komikcast.li/chapter/murim-login-chapter-131-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 130","url":"https://komikcast.li/chapter/murim-login-chapter-130-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 129","url":"https://komikcast.li/chapter/murim-login-chapter-129-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 128","url":"https://komikcast.li/chapter/murim-login-chapter-128-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 127","url":"https://komikcast.li/chapter/murim-login-chapter-127-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 126","url":"https://komikcast.li/chapter/murim-login-chapter-126-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 125","url":"https://komikcast.li/chapter/murim-login-chapter-125-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 124","url":"https://komikcast.li/chapter/murim-login-chapter-124-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 123","url":"https://komikcast.li/chapter/murim-login-chapter-123-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 122","url":"https://komikcast.li/chapter/murim-login-chapter-122-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 121","url":"https://komikcast.li/chapter/murim-login-chapter-121-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 120","url":"https://komikcast.li/chapter/murim-login-chapter-120-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 119","url":"https://komikcast.li/chapter/murim-login-chapter-119-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 118","url":"https://komikcast.li/chapter/murim-login-chapter-118-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 117","url":"https://komikcast.li/chapter/murim-login-chapter-117-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 116","url":"https://komikcast.li/chapter/murim-login-chapter-116-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 115","url":"https://komikcast.li/chapter/murim-login-chapter-115-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 114","url":"https://komikcast.li/chapter/murim-login-chapter-114-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 113","url":"https://komikcast.li/chapter/murim-login-chapter-113-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 112","url":"https://komikcast.li/chapter/murim-login-chapter-112-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 111","url":"https://komikcast.li/chapter/murim-login-chapter-111-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 110","url":"https://komikcast.li/chapter/murim-login-chapter-110-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 109","url":"https://komikcast.li/chapter/murim-login-chapter-109-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 108","url":"https://komikcast.li/chapter/murim-login-chapter-108-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 107","url":"https://komikcast.li/chapter/murim-login-chapter-107-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 106","url":"https://komikcast.li/chapter/murim-login-chapter-106-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 105","url":"https://komikcast.li/chapter/murim-login-chapter-105-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 104","url":"https://komikcast.li/chapter/murim-login-chapter-104-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 103","url":"https://komikcast.li/chapter/murim-login-chapter-103-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 102","url":"https://komikcast.li/chapter/murim-login-chapter-102-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 101","url":"https://komikcast.li/chapter/murim-login-chapter-101-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 100","url":"https://komikcast.li/chapter/murim-login-chapter-100-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 99","url":"https://komikcast.li/chapter/murim-login-chapter-99-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 98","url":"https://komikcast.li/chapter/murim-login-chapter-98-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 97","url":"https://komikcast.li/chapter/murim-login-chapter-97-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 96","url":"https://komikcast.li/chapter/murim-login-chapter-96-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 95","url":"https://komikcast.li/chapter/murim-login-chapter-95-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 94","url":"https://komikcast.li/chapter/murim-login-chapter-94-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 93","url":"https://komikcast.li/chapter/murim-login-chapter-93-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 92","url":"https://komikcast.li/chapter/murim-login-chapter-92-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 91","url":"https://komikcast.li/chapter/murim-login-chapter-91-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 90","url":"https://komikcast.li/chapter/murim-login-chapter-90-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 89","url":"https://komikcast.li/chapter/murim-login-chapter-89-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 88","url":"https://komikcast.li/chapter/murim-login-chapter-88-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 87","url":"https://komikcast.li/chapter/murim-login-chapter-87-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 86","url":"https://komikcast.li/chapter/murim-login-chapter-86-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 85","url":"https://komikcast.li/chapter/murim-login-chapter-85-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 84","url":"https://komikcast.li/chapter/murim-login-chapter-84-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 83","url":"https://komikcast.li/chapter/murim-login-chapter-83-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 82","url":"https://komikcast.li/chapter/murim-login-chapter-82-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 81","url":"https://komikcast.li/chapter/murim-login-chapter-81-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 80","url":"https://komikcast.li/chapter/murim-login-chapter-80-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 79","url":"https://komikcast.li/chapter/murim-login-chapter-79-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 78","url":"https://komikcast.li/chapter/murim-login-chapter-78-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 77","url":"https://komikcast.li/chapter/murim-login-chapter-77-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 76","url":"https://komikcast.li/chapter/murim-login-chapter-76-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 75","url":"https://komikcast.li/chapter/murim-login-chapter-75-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 74","url":"https://komikcast.li/chapter/murim-login-chapter-74-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 73","url":"https://komikcast.li/chapter/murim-login-chapter-73-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 72","url":"https://komikcast.li/chapter/murim-login-chapter-72-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 71","url":"https://komikcast.li/chapter/murim-login-chapter-71-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 70","url":"https://komikcast.li/chapter/murim-login-chapter-70-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 69","url":"https://komikcast.li/chapter/murim-login-chapter-69-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 68","url":"https://komikcast.li/chapter/murim-login-chapter-68-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 67","url":"https://komikcast.li/chapter/murim-login-chapter-67-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 66","url":"https://komikcast.li/chapter/murim-login-chapter-66-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 65","url":"https://komikcast.li/chapter/murim-login-chapter-65-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 64","url":"https://komikcast.li/chapter/murim-login-chapter-64-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 63","url":"https://komikcast.li/chapter/murim-login-chapter-63-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 62","url":"https://komikcast.li/chapter/murim-login-chapter-62-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 61","url":"https://komikcast.li/chapter/murim-login-chapter-61-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 60","url":"https://komikcast.li/chapter/murim-login-chapter-60-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 59","url":"https://komikcast.li/chapter/murim-login-chapter-59-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 58","url":"https://komikcast.li/chapter/murim-login-chapter-58-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 57","url":"https://komikcast.li/chapter/murim-login-chapter-57-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 56","url":"https://komikcast.li/chapter/murim-login-chapter-56-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 55","url":"https://komikcast.li/chapter/murim-login-chapter-55-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 54","url":"https://komikcast.li/chapter/murim-login-chapter-54-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 53","url":"https://komikcast.li/chapter/murim-login-chapter-53-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 52","url":"https://komikcast.li/chapter/murim-login-chapter-52-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 51","url":"https://komikcast.li/chapter/murim-login-chapter-51-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 50","url":"https://komikcast.li/chapter/murim-login-chapter-50-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 49","url":"https://komikcast.li/chapter/murim-login-chapter-49-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 48","url":"https://komikcast.li/chapter/murim-login-chapter-48-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 47","url":"https://komikcast.li/chapter/murim-login-chapter-47-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 46","url":"https://komikcast.li/chapter/murim-login-chapter-46-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 45","url":"https://komikcast.li/chapter/murim-login-chapter-45-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 44","url":"https://komikcast.li/chapter/murim-login-chapter-44-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 43","url":"https://komikcast.li/chapter/murim-login-chapter-43-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 42","url":"https://komikcast.li/chapter/murim-login-chapter-42-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 41","url":"https://komikcast.li/chapter/murim-login-chapter-41-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 40","url":"https://komikcast.li/chapter/murim-login-chapter-40-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 39","url":"https://komikcast.li/chapter/murim-login-chapter-39-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 38","url":"https://komikcast.li/chapter/murim-login-chapter-38-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 37","url":"https://komikcast.li/chapter/murim-login-chapter-37-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 36","url":"https://komikcast.li/chapter/murim-login-chapter-36-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 35","url":"https://komikcast.li/chapter/murim-login-chapter-35-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 34","url":"https://komikcast.li/chapter/murim-login-chapter-34-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 33","url":"https://komikcast.li/chapter/murim-login-chapter-33-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 32","url":"https://komikcast.li/chapter/murim-login-chapter-32-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 31","url":"https://komikcast.li/chapter/murim-login-chapter-31-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 30","url":"https://komikcast.li/chapter/murim-login-chapter-30-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 29","url":"https://komikcast.li/chapter/murim-login-chapter-29-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 28","url":"https://komikcast.li/chapter/murim-login-chapter-28-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 27","url":"https://komikcast.li/chapter/murim-login-chapter-27-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 26","url":"https://komikcast.li/chapter/murim-login-chapter-26-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 25","url":"https://komikcast.li/chapter/murim-login-chapter-25-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 24","url":"https://komikcast.li/chapter/murim-login-chapter-24-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 23","url":"https://komikcast.li/chapter/murim-login-chapter-23-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 22","url":"https://komikcast.li/chapter/murim-login-chapter-22-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 21","url":"https://komikcast.li/chapter/murim-login-chapter-21-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 20","url":"https://komikcast.li/chapter/murim-login-chapter-20-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 19","url":"https://komikcast.li/chapter/murim-login-chapter-19-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 18","url":"https://komikcast.li/chapter/murim-login-chapter-18-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 17","url":"https://komikcast.li/chapter/murim-login-chapter-17-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 16","url":"https://komikcast.li/chapter/murim-login-chapter-16-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 15","url":"https://komikcast.li/chapter/murim-login-chapter-15-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 14","url":"https://komikcast.li/chapter/murim-login-chapter-14-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 13","url":"https://komikcast.li/chapter/murim-login-chapter-13-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 12","url":"https://komikcast.li/chapter/murim-login-chapter-12-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 11","url":"https://komikcast.li/chapter/murim-login-chapter-11-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 10","url":"https://komikcast.li/chapter/murim-login-chapter-10-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 9","url":"https://komikcast.li/chapter/murim-login-chapter-9-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 8","url":"https://komikcast.li/chapter/murim-login-chapter-8-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 7","url":"https://komikcast.li/chapter/murim-login-chapter-7-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 6","url":"https://komikcast.li/chapter/murim-login-chapter-6-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 5","url":"https://komikcast.li/chapter/murim-login-chapter-5-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 4","url":"https://komikcast.li/chapter/murim-login-chapter-4-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 3","url":"https://komikcast.li/chapter/murim-login-chapter-3-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 2","url":"https://komikcast.li/chapter/murim-login-chapter-2-bahasa-indonesia/","date_upload":"1727717063683"},{"name":"Chapter\n 1","url":"https://komikcast.li/chapter/murim-login-chapter-1-bahasa-indonesia/","date_upload":"1727717063683"}]}}
+    {
+      "success": true,
+      "data": {
+        "title": "Murim Login",
+        "alternative_title": "Murim Login",
+        "author": "",
+        "artist": "",
+        "description": "Sebuah era di mana para hunter hidup dengan berburu monster yang berasal dari Gerbang. Jin Tae-Kyung adalah hunter tingkat rendah yang mengambil mesin VR, dan secara tidak sengaja masuk ke dalam game, yang diatur dalam dunia Seni Bela Diri. Setelah berkali-kali jatuh bangun, Tae-Kyung mampu melarikan diri dari dunia ini. Kekuatan dan keterampilan, yang ia terima di Murim dapat dibawa kembali ke dunia nyata. Ini memungkinkannya untuk terus mencari nafkah sebagai hunter. tetapi dia memutuskan untuk kembali ke dunia Murim, karena tidak merawat teman-teman NPC-nya.",
+        "genre": ["Action", "Game", "Martial Arts"],
+        "status": "Ongoing",
+        "type": "",
+        "thumbnail_url": "https://komikcast.li/wp-content/uploads/2024/07/murim-login.jpeg",
+        "chapters": [
+          {
+            "name": "Chapter\n 229",
+            "url": "https://komikcast.li/chapter/murim-login-chapter-229-bahasa-indonesia/",
+            "date_upload": "1751131463679"
+          }
+          // ...dan seterusnya...
+        ]
+      }
+    }
     ```
+
 
 ### 7. Gambar Chapter
 
 Mengambil daftar URL gambar untuk chapter tertentu.
 
--   **URL:** `https://3000-ixht87yjtusx3c8lir9le-468b127e.manusvm.computer/chapter/kimetsu-no-yaiba/1`
+-   **URL:** `https://komikcast-parser-expressjs-production.up.railway.app/chapter/kimetsu-no-yaiba/1`
 -   **Metode:** `GET`
 -   **URL Parameters:**
     -   `slug` (wajib): Slug manga
     -   `chapterNumber` (wajib): Nomor chapter (contoh: `100`, `100.5`)
 -   **Contoh Respons:**
     ```json
-    {"success":false,"error":"Failed to fetch chapter images","message":"Request failed with status code 404"}
+    {
+      "success": false,
+      "error": "Failed to fetch chapter images",
+      "message": "Request failed with status code 404"
+    }
     ```
+
 
 ### 8. Filter Manga
 
 Memfilter manga berdasarkan berbagai kriteria.
 
--   **URL:** `https://3000-ixht87yjtusx3c8lir9le-468b127e.manusvm.computer/filter?status=ongoing&type=manga&orderby=popular&genres=action,fantasy&page=1`
+-   **URL:** `https://komikcast-parser-expressjs-production.up.railway.app/filter?status=ongoing&type=manga&orderby=popular&genres=action,fantasy&page=1`
 -   **Metode:** `GET`
 -   **Query Parameters:**
     -   `page` (opsional): Nomor halaman (default: 1)
@@ -170,7 +379,26 @@ Memfilter manga berdasarkan berbagai kriteria.
     -   `project` (opsional): `true` jika ingin memfilter dari halaman proyek (default: `false`)
 -   **Contoh Respons:**
     ```json
-    {"success":true,"page":1,"filters":{"status":"ongoing","type":"manga","orderby":"popular","genres":[],"project":false},"data":[{"title":"Isekai Meikyuu de Harem wo","link":"https://komikcast.li/komik/isekai-meikyuu-de-harem-wo/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/08/MLk0D0.jpg","latestChapter":"Ch.86"},{"title":"Kaifuku Jutsushi Yarinaoshi: Sokushi Mahou to Skill Copy no Chouetsu Heal","link":"https://komikcast.li/komik/kaifuku-jutsushi-yarinaoshi-sokushi-mahou-skill-copy-no-chouetsu-heal/","thumbnail":"https://komikcast.li/wp-content/uploads/2021/07/E6hIrS9WEAUGPwt-e1626659207402.jpg","latestChapter":"Ch.70.2"},{"title":"Kaguya-sama wa Kokurasetai: Tensai-tachi no Renai Zunousen","link":"https://komikcast.li/komik/kaguya-sama-wa-kokurasetai-tensai-tachi-no-renai-zunousen/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/10/kswk12412321321-e1665414017483.jpg","latestChapter":"Ch.281 END"},{"title":"Isekai Shihai no Skill Taker: Zero kara Hajimeru Dorei Harem","link":"https://komikcast.li/komik/isekai-shihai-no-skill-taker-zero-kara-hajimeru-dorei-harem/","thumbnail":"https://komikcast.li/wp-content/uploads/2018/05/DKK9CllUIAEpcZO.jpg","latestChapter":"Ch.76"},{"title":"Boku no Hero Academia","link":"https://komikcast.li/komik/boku-no-hero-academia/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/05/heroacademy.jpg","latestChapter":"Ch.430.6"},{"title":"Kingdom","link":"https://komikcast.li/komik/kingdom/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/05/Kingdom-e1747936156401.jpg","latestChapter":"Ch.841"},{"title":"Kage no Jitsuryokusha ni Naritakute","link":"https://komikcast.li/komik/kage-no-jitsuryokusha-ni-naritakute/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/11/kageno.jpg","latestChapter":"Ch.73.2"},{"title":"Isekai Nonbiri Nouka","link":"https://komikcast.li/komik/isekai-nonbiri-nouka/","thumbnail":"https://komikcast.li/wp-content/uploads/2020/09/91C6UHpHo8L-e1606669024811.jpg","latestChapter":"Ch.267"},{"title":"Berserk of Gluttony","link":"https://komikcast.li/komik/berserk-of-gluttony/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/04/z7QMlM.jpg","latestChapter":"Ch.68 Fix"},{"title":"Hachinan tte Sore wa Nai Deshou","link":"https://komikcast.li/komik/hachinan-tte-sore-wa-nai-deshou/","thumbnail":"https://komikcast.li/wp-content/uploads/2021/01/BT000033613700900901-e1616178228128.jpg","latestChapter":"Ch.102"},{"title":"The New Gate","link":"https://komikcast.li/komik/the-new-gate/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/01/2Nvz8e.jpg","latestChapter":"Ch.110"},{"title":"Fukushuu o Koinegau Saikyou Yuusha wa, Yami no Chikara de Senmetsu Musou Suru","link":"https://komikcast.li/komik/fukushuu-o-koinegau-saikyou-yuusha-wa-yami-no-chikara-de-senmetsu-musou-suru/","thumbnail":"https://komikcast.li/wp-content/uploads/2021/07/E7czV3QWEAIfC-n-e1627579796659.jpg","latestChapter":"Ch.113"},{"title":"Makikomarete Isekai Teni suru Yatsu wa, Taitei Cheat","link":"https://komikcast.li/komik/makikomarete-isekai-teni-suru-yatsu-wa-taitei-cheat/","thumbnail":"https://komikcast.li/wp-content/uploads/2020/07/2gasd2g2ash80v4-e1595502591153.jpg","latestChapter":"Ch.61.3"},{"title":"Tate no Yuusha no Nariagari","link":"https://komikcast.li/komik/tate-no-yuusha-no-nariagari/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/03/tny523523423-e1678454447716.jpg","latestChapter":"Ch.114"},{"title":"Hitoribocchi no Isekai Kouryaku","link":"https://komikcast.li/komik/hitoribocchi-no-isekai-kouryaku/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/11/cb98d847-cfbe-4673-9dac-9f179788ed7c.jpg","latestChapter":"Ch.276"},{"title":"The Wrong Way to use Healing Magic","link":"https://komikcast.li/komik/wrong-way-use-healing-magic/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/01/wrong.jpg","latestChapter":"Ch.73"},{"title":"Dr. Stone","link":"https://komikcast.li/komik/dr-stone/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/07/ds72351241212-e1657264746729.jpg","latestChapter":"Ch.232.3"},{"title":"Komi san wa Komyushou Desu","link":"https://komikcast.li/komik/komi-san-wa-komyushou-desu/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/11/komisan.jpg","latestChapter":"Ch.499"},{"title":"Maou ni Natte node – Dungeon Tsukutte Jingai Musume to Honobono suru","link":"https://komikcast.li/komik/maou-ni-natte-node-dungeon-tsukutte-jingai-musume-to-honobono-suru/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/11/d6555fff-ba37-475d-a460-36971402e6e8.jpg","latestChapter":"Ch.81.2"},{"title":"Fuufu Ijou Koibito Miman","link":"https://komikcast.li/komik/fuufu-ijou-koibito-miman/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/03/GXmZ3y.jpg","latestChapter":"Ch.79 Fix"},{"title":"Gaikotsu Kishi-sama, Tadaima Isekai e Odekakechuu","link":"https://komikcast.li/komik/gaikotsu-kishi-sama-tadaima-isekai-e-odekakechuu/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/02/d0W2pK.jpg","latestChapter":"Ch.66"},{"title":"Game obu Familia – Family Senki","link":"https://komikcast.li/komik/game-obu-familia-family-senki/","thumbnail":"https://komikcast.li/wp-content/uploads/2019/07/wqewqe232141gfg.jpg","latestChapter":"Ch.73"},{"title":"Boruto: Naruto Next Generations","link":"https://komikcast.li/komik/boruto-naruto-next-generations/","thumbnail":"https://komikcast.li/wp-content/uploads/2023/04/boruto.jpg","latestChapter":"Ch.80"},{"title":"Kenja no Mago","link":"https://komikcast.li/komik/kenja-no-mago/","thumbnail":"https://komikcast.li/wp-content/uploads/2024/10/d0WQLv.jpg","latestChapter":"Ch.86"},{"title":"Chainsawman","link":"https://komikcast.li/komik/chainsawman/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/10/chi2362352423-e1666713690552.jpg","latestChapter":"Ch.206"},{"title":"Shikkakumon no Saikyou Kenja","link":"https://komikcast.li/komik/shikkakumon-no-saikyou-kenja/","thumbnail":"https://komikcast.li/wp-content/uploads/2021/12/snsk74263534-e1640946818276.jpg","latestChapter":"Ch.81"},{"title":"Tensei Kenja no Isekai Raifu ~Daini no Shokugyo wo Ete Sekai Saikyou ni Narimashita","link":"https://komikcast.li/komik/tensei-kenja-no-isekai-raifu-daini-no-shokugyo-wo-ete-sekai-saikyou-ni-narimashita/","thumbnail":"https://komikcast.li/wp-content/uploads/2022/11/a76b7b7d-d668-43f8-af02-cf034eadc0ee.jpg","latestChapter":"Ch.82"},{"title":"The Cuckoo’s Fiancee","link":"https://komikcast.li/komik/the-cuckoos-fiancee/","thumbnail":"https://komikcast.li/wp-content/uploads/2025/05/d0Xk0z-1.jpg","latestChapter":"Ch.252"}]
+    {
+      "success": true,
+      "page": 1,
+      "filters": {
+        "status": "ongoing",
+        "type": "manga",
+        "orderby": "popular",
+        "genres": [],
+        "project": false
+      },
+      "data": [
+        {
+          "title": "Isekai Meikyuu de Harem wo",
+          "link": "https://komikcast.li/komik/isekai-meikyuu-de-harem-wo/",
+          "thumbnail": "https://komikcast.li/wp-content/uploads/2024/08/MLk0D0.jpg",
+          "latestChapter": "Ch.86"
+        }
+        // ...dan seterusnya...
+      ]
+    }
     ```
 
 ## Pengujian
